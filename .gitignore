@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Vscode settings
+.vscode/*
+
+# Python venv
+env/*
+
+# YOLO weights and config
+yolov3.cfg
+yolov3.weights
