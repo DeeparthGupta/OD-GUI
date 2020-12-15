@@ -137,3 +137,5 @@ env/*
 # YOLO weights and config
 yolov3.cfg
 yolov3.weights
+
+coco.names
