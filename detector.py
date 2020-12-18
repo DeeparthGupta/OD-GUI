@@ -4,16 +4,20 @@ from cv2 import cv2
 
 class Detector:
     
-    def __init__(self):
+    def __init__(self, support_dir):
+        self.yolo_dir = support_dir
         self.model, self.classes, self.output_layers = self.load_yolo()
         
     
     def load_yolo(self):
         #Load the yolov3 weights and config file with the help of dnn module of openCV.
+        weights = self.yolo_dir + 'yolov3.weights'
+        config = self.yolo_dir + 'yolov3.cfg'
+        names = self.yolo_dir + 'coco.names'
         
-        net = cv2.dnn.readNet('yolov3.weights','yolov3.cfg')
+        net = cv2.dnn.readNet(weights,config)
         classes = []
-        with open("coco.names", "r") as f:
+        with open(names, "r") as f:
             classes = [line.strip() for line in f.readlines()]
         layers_names = net.getLayerNames()
         output_layers = [layers_names[i[0]-1] for i in net.getUnconnectedOutLayers()]
