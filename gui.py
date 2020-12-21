@@ -1,6 +1,9 @@
+from detector import Detector
 import PySimpleGUI as gui
-import detector as det
+import Detector as det
 
+
+detector = Detector('yolo_support_files', size=(320,320))
 
 layout = [[gui.Image(filename='', key='videoOut',tooltip='Video goes here.', size=(480,320))],
           [gui.ReadButton(button_text='Play',key='playbtn'), gui.Exit()]]

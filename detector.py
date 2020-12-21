@@ -7,8 +7,7 @@ class Detector:
     def __init__(self, support_dir, size=(320,320)):
         self.yolo_dir = support_dir
         self.size = size
-        self.model, self.classes, self.output_layers = self.load_yolo()
-        
+        self.model, self.classes, self.output_layers = self.load_yolo()        
     
     def load_yolo(self):
     # Load the yolov3 weights and config file with the help of dnn module of openCV.
@@ -25,8 +24,7 @@ class Detector:
         return net, classes, output_layers
 
     def detect_objects(self,img, net, outputLayers):		
-    # Use blobFromImage that accepts image/frame from video or webcam stream, model and output layers as parameters.
-            
+    # Use blobFromImage that accepts image/frame from video or webcam stream, model and output layers as parameters.          
         blob = cv2.dnn.blobFromImage(img, scalefactor=0.00392, size=self.size, mean=(0, 0, 0), swapRB=True, crop=False)
         net.setInput(blob)
         outputs = net.forward(outputLayers)
@@ -34,8 +32,7 @@ class Detector:
 
     def get_box_dimensions(self, outputs, height, width, min_confidence):
     # The list scores is created which stores the confidence corresponding to each object. 
-    # Can play around with this value.
-        
+    # Made it user controllable.      
         boxes = []
         confs = []
         class_ids = []
@@ -61,7 +58,6 @@ class Detector:
 
     def draw_labels(self, boxes, confs, class_ids, classes, img): 
     # Draw bounding box and add object labels to it.
-
         indexes = cv2.dnn.NMSBoxes(boxes, confs, 0.5, 0.4)
         font = cv2.FONT_HERSHEY_PLAIN
         for i in range(len(boxes)):
