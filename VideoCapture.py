@@ -1,4 +1,3 @@
-import queue
 from threading import Thread
 from cv2 import cv2
 from queue import Queue, Empty, Full
