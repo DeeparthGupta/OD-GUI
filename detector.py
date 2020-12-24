@@ -72,14 +72,6 @@ class Detector:
     def run_detection(self, frame, min_confidence = 0.5):    
     # Accept a frame, run detection on it and draw a box around the detection.
 
-        # cap = cv2.VideoCapture(input)
-        
-        """ while True:
-            if not output:
-                print('ERROR: Nothing to output to')
-                exit(1) """
-            
-        # _,frame = cap.read()
         height, width = frame.shape[:1]
         outputs = self.detect_objects(frame, self.model, self.output_layers)
         boxes, confidence, class_ids = self.get_box_dimensions(outputs,height,width,min_confidence)
