@@ -2,13 +2,13 @@ from detector import Detector
 import PySimpleGUI as gui
 import Detector as det
 
-size = (320,320)
 
-# Create a detector
-detector = Detector('yolo_support_files', size=size)
+detector = Detector('yolo_support_files', size=(320,320)) #Create a detector 
 
-# Define layout
-layout = [[gui.Image(filename='', key='videoOut',tooltip='Video goes here.', size=size)],
+layout = [[]]
+
+# Layout of the popup window
+layout1 = [[gui.Image(filename='', key='videoOut',tooltip='Video goes here.', size=(320,320))],
           [gui.ReadButton(button_text='Play',key='playbtn'), gui.Exit()]]
 
 # Initialize window

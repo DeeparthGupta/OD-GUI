@@ -2,7 +2,7 @@ from threading import Thread
 from cv2 import cv2
 from queue import Queue, Empty, Full
 
-class VideoCapture:
+class InputStream:
 # Creates a new thread to retrieve frames using multithreading.
     def __init__(self,src = 0, memory = None):
         self.stream = cv2.VideoCapture(src)
