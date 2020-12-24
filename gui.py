@@ -2,16 +2,17 @@ from detector import Detector
 import PySimpleGUI as gui
 import Detector as det
 
+size = (320,320)
 
 # Create a detector
-detector = Detector('yolo_support_files', size=(320,320))
+detector = Detector('yolo_support_files', size=size)
 
 # Define layout
-layout = [[gui.Image(filename='', key='videoOut',tooltip='Video goes here.', size=(480,320))],
+layout = [[gui.Image(filename='', key='videoOut',tooltip='Video goes here.', size=size)],
           [gui.ReadButton(button_text='Play',key='playbtn'), gui.Exit()]]
 
 # Initialize window
-window = gui.Window('Camera View')
+window = gui.Window('Object detector')
 window.Layout(layout).finalize()
 
 
