@@ -30,7 +30,7 @@ class Detector:
         outputs = net.forward(outputLayers)
         return outputs
 
-    def get_box_dimensions(self, outputs, height, width, min_confidence):
+    def get_box_dimensions(self, outputs, height, width, threshold):
     # The list scores is created which stores the confidence corresponding to each object. 
     # Made it user controllable.      
         boxes = []
@@ -42,7 +42,7 @@ class Detector:
                 #print(scores)
                 class_id = np.argmax(scores)
                 conf = scores[class_id]
-                if conf > min_confidence:
+                if conf > threshold:
                     center_x = int(detect[0] * width)
                     center_y = int(detect[1] * height)
                     w = int(detect[2] * width)
@@ -69,11 +69,11 @@ class Detector:
         
         return img
 
-    def run_detection(self, frame, min_confidence = 0.5):    
+    def run_detection(self, frame, threshold = 0.5):    
     # Accept a frame, run detection on it and draw a box around the detection.
 
         height, width = frame.shape[:1]
         outputs = self.detect_objects(frame, self.model, self.output_layers)
-        boxes, confidence, class_ids = self.get_box_dimensions(outputs,height,width,min_confidence)
+        boxes, confidence, class_ids = self.get_box_dimensions(outputs,height,width,threshold)
             
         return self.draw_labels(boxes,confidence,class_ids,self.classes,frame)
