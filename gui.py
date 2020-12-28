@@ -1,11 +1,11 @@
 from detector import Detector
 import PySimpleGUI as gui
-import Detector as det
 
+# detector = Detector('yolo_support_files', size=(320,320)) #Create a detector 
 
-detector = Detector('yolo_support_files', size=(320,320)) #Create a detector 
-
-layout = [[]]
+layout = [
+    [gui.Text('YOLO Video Player', size=(22,1), font=('Any',18,'Bold'),text_color='#1c86ee' ,justification='left'),]
+    ]
 
 # Layout of the popup window
 layout1 = [[gui.Image(filename='', key='videoOut',tooltip='Video goes here.', size=(320,320))],
@@ -21,7 +21,6 @@ while True:
     event, values = window.Read(timeout=0)
     if event == gui.WIN_CLOSED or event == 'Exit':
         break
-    
-    
+
     
 window.close()

@@ -4,7 +4,7 @@ from queue import Queue, Empty, Full
 
 class InputStream:
 # Creates a new thread to retrieve frames using multithreading.
-    def __init__(self,src = 0, memory = None):
+    def __init__(self,src = 0, memory = 1):
         self.stream = cv2.VideoCapture(src)
         (self.grabbed, self.frame) = self.stream.read()
         self.stopped = False
@@ -16,11 +16,15 @@ class InputStream:
                 self.stop()
             else:
                 (self.grabbed, self.frame) = self.stream.read()
-                try:
-                    self.memory.put(self.frame, block=True,timeout=2.0)
-                except Full:
-                    print('ERROR: Queue full timeout.')
-                    self.stop()           
+                if self.memory is not None:
+                    try:
+                        self.memory.put(self.frame, block=True,timeout=2.0)
+                    except Full:
+                        print('ERROR: Queue full timeout.')     
+                
+                else: 
+                    print('Need memory') 
+                    self.stop()
     
     def get_frame_from_mem(self):
     # Pop the memory Queue.
