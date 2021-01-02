@@ -3,7 +3,7 @@ from cv2 import cv2
 
 
 class Detector:
-    
+# Class that runs object detection on an input frame.
     def __init__(self, support_dir, size=(320,320)):
         self.yolo_dir = support_dir
         self.size = size
@@ -15,7 +15,11 @@ class Detector:
         config = self.yolo_dir + 'yolov3.cfg'
         names = self.yolo_dir + 'coco.names'
         
+        # Configure the neural net.
         net = cv2.dnn.readNet(weights,config)
+        net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+        net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
+        
         classes = []
         with open(names, "r") as f:
             classes = [line.strip() for line in f.readlines()]
@@ -30,9 +34,8 @@ class Detector:
         outputs = net.forward(outputLayers)
         return outputs
 
-    def get_box_dimensions(self, outputs, height, width, threshold):
-    # The list scores is created which stores the confidence corresponding to each object. 
-    # Made it user controllable.      
+    def get_box_dimensions(outputs, height, width, threshold):
+    # The list scores is created which stores the confidence corresponding to each object.     
         boxes = []
         confs = []
         class_ids = []
@@ -56,7 +59,7 @@ class Detector:
 
         return boxes, confs, class_ids
 
-    def draw_labels(self, boxes, confs, class_ids, classes, img): 
+    def draw_labels(boxes, confs, class_ids, classes, img): 
     # Draw bounding box and add object labels to it.
         indexes = cv2.dnn.NMSBoxes(boxes, confs, 0.5, 0.4)
         font = cv2.FONT_HERSHEY_PLAIN
@@ -71,7 +74,6 @@ class Detector:
 
     def run_detection(self, frame, threshold = 0.5):    
     # Accept a frame, run detection on it and draw a box around the detection.
-
         height, width = frame.shape[:1]
         outputs = self.detect_objects(frame, self.model, self.output_layers)
         boxes, confidence, class_ids = self.get_box_dimensions(outputs,height,width,threshold)
