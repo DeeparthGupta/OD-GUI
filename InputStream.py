@@ -1,6 +1,6 @@
 from threading import Thread
 from cv2 import cv2
-from collections import Deque
+from collections import deque
 
 class InputStream:
 # Creates a new thread to retrieve frames using multithreading.
@@ -8,7 +8,7 @@ class InputStream:
         self.stream = cv2.VideoCapture(src)
         (self.grabbed, self.frame) = self.stream.read()
         self.stopped = False
-        self.memory = Deque(memory) if memory else None
+        self.memory = deque(maxlen=memory) if memory else None
 
     def get(self):
         while not self.stopped:

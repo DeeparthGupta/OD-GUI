@@ -4,7 +4,9 @@ from InputStream import InputStream
 
 
 
-# detector = Detector('yolo_support_files', size=(320,320)) #Create a detector 
+# detector = Detector('yolo_support_files', size=vid_size #Create a detector 
+
+vid_size = (320,320)
 
 layout = [
     [gui.Text('YOLO Video Player', size=(22,1), font=('Any',18),text_color='#ffffff' ,justification='center')],
@@ -15,7 +17,7 @@ layout = [
  ]
 
 # Layout of the popup window
-layout1 = [[gui.Image(filename='', key='videoOut',tooltip='Video goes here.', size=(320,320))],
+layout1 = [[gui.Image(key='videoOut',tooltip='Video goes here.', size=vid_size)],
           [gui.ReadButton(button_text='Play',key='playbtn'), gui.Exit()]]
 
 # Initialize window
