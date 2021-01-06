@@ -136,3 +136,6 @@ env/*
 
 # YOLO weights and config
 yolo_support_files/*
+
+# Specific file
+input_stream_test.py

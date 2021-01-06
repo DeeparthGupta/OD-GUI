@@ -8,7 +8,7 @@ class InputStream:
         self.stream = cv2.VideoCapture(src)
         (self.grabbed, self.frame) = self.stream.read()
         self.stopped = False
-        self.memory = deque(maxlen=memory) if memory else None
+        # self.memory = deque(maxlen=memory) if memory else None
 
     def get(self):
         while not self.stopped:
@@ -17,13 +17,13 @@ class InputStream:
             else:
                 (self.grabbed, self.frame) = self.stream.read()
                 
-                if self.memory is not None:
+                """ if self.memory is not None:
                     try:
                         self.memory.appendleft(self.frame) # Push to memory queue
                     except Exception as e:
-                        print(e)
+                        print(e) """
                             
-    def get_frame(self): 
+    """ def get_frame(self): 
     # Return the frame
         if self.memory is not None:
             try:
@@ -31,7 +31,7 @@ class InputStream:
             except Exception as e:
                 print(e)
 
-        else: return self.frame      
+        else: return self.frame   """    
 
     def start(self):
     # Starts the threaded capture
