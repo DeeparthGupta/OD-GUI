@@ -1,6 +1,6 @@
 from threading import Thread
 from cv2 import cv2
-from collections import deque
+# from collections import deque
 
 class InputStream:
 # Creates a new thread to retrieve frames using multithreading.
@@ -21,9 +21,9 @@ class InputStream:
                     try:
                         self.memory.appendleft(self.frame) # Push to memory queue
                     except Exception as e:
-                        print(e) """
+                        print(e)
                             
-    """ def get_frame(self): 
+    def get_frame(self): 
     # Return the frame
         if self.memory is not None:
             try:
